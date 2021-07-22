@@ -15,3 +15,9 @@ UBC Campus Tours is an application that provides self-guided tour option to pros
 
 ## Personal Motivation:
 As a current *Student Ambassador*, I had given over 200 tours around the UBC campus and chatted with over 20,000 students about my experience of student life. I noticed that tours were more effective when they were targeted for specific group (for example a prospective student interested in learning about the Computer Science program at UBC versus an international student incoming student interested in learning about UBC Athletics). Additionally, students are more confident making their university decision when they learnt everything they needed to know. This explains the demand on something that keeps track of the student’s knowledge about the campus. I am also interested in working with the Emerging Media Lab on making a VR of UBC campus which could go hand in hand with this application.  
+
+### User Stories:
+-	As a user, I want to be able to create add a tour stop of my own interest to the recommended tour route.
+-	As a user, I want to be able to view a mapping of the stops I still need to visit
+-	As a user, I want to be able to view a mapping of the stops I had already visited
+-	As a user, I want to be able to select visited tour stops and remove them from my list
