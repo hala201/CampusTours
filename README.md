@@ -20,7 +20,9 @@ As a current *Student Ambassador*, I had given over 200 tours around the UBC cam
 -	As a user, I want to get a recommended tour route
 -	As a user, I want to be able to view a mapping of the stops I still need to visit
 -	As a user, I want to be able to view a mapping of the stops I had already visited
--	As a user, I want to be able to select visited tour stops and remove them from my list
+-	As a user, I want to be able to select unvisited tour stops and remove them from my list
 -   As a user, I want to be able to add available tour stops to my tour route
 -   As a user, I want to be able to mark stops I want to revisit
+-   As a user, I want to be able to get brief information about each tour stop
+
 
