@@ -1,11 +1,26 @@
-# My Personal Project
+# UBC Campus Tours
 
-## A subtitle
+## Purpose of the Application:
+UBC Campus Tours is an application that provides self-guided tour option to prospective and incoming students to explore the UBC Campus. Many incoming students find that campus tours augment their university experience with a smooth transition from high school. Additionally, prospective students and their family find visiting campus to be the best way to experience life at their future institution. Therefore, UBC offers scheduled campus tours to all students who desire to explore campus. However, there is a high demand on non-scheduled, customizable tours that allow each student to experience campus autonomously. Highlight features of the app include:
 
-A *bulleted* list:
-- item 1
-- item 2
-- item 3
+- A **customizable** list of campus stops
+- **Keeping track** of visited stops on a map
+-  A list of **recommended** orientation events
 
-An example of text with **bold** and *italic* fonts.  Note that the IntelliJ markdown previewer doesn't seem to render 
-the bold and italic fonts correctly but they will appear correctly on GitHub.
+## Target Audience:
+-	Prospective students deciding whether UBC is right for them
+-	Prospective students choosing which UBC campus is right for them
+-	Incoming students
+-	2020-2021 cohort that experience campus only virtually
+
+## Personal Motivation:
+As a current *Student Ambassador*, I had given over 200 tours around the UBC campus and chatted with over 20,000 students about my experience of student life. I noticed that tours were more effective when they were targeted for specific group (for example a prospective student interested in learning about the Computer Science program at UBC versus an international student incoming student interested in learning about UBC Athletics). Additionally, students are more confident making their university decision when they learnt everything they needed to know. This explains the demand on something that keeps track of the student’s knowledge about the campus. I am also interested in working with the Emerging Media Lab on making a VR of UBC campus which could go hand in hand with this application.
+
+### User Stories:
+-	As a user, I want to get a recommended tour route
+-	As a user, I want to be able to view a mapping of the stops I still need to visit
+-	As a user, I want to be able to view a mapping of the stops I had already visited
+-	As a user, I want to be able to select visited tour stops and remove them from my list
+-   As a user, I want to be able to add available tour stops to my tour route
+-   As a user, I want to be able to mark stops I want to revisit
+

@@ -1,5 +1,5 @@
 package model;
 
-public class MyModel {
+public class MyCampusTour {
     // delete or rename this class!
 }
