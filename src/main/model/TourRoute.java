@@ -4,37 +4,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TourRoute {
+    int totalDuration;
+    String facultyOfInterest;
 
-    //EFFECTS: make an empty tour list
     List<TourStop> myRoute = new ArrayList<TourStop>();
 
-    public void tourRoute(){}
-
-    //EFFECTS: display my customized tour stops
-    public String displayMyRoute() {
-        return null;
+    //EFFECTS: make an empty tour list
+    public void tourRoute() {
     }
 
-    //EFFECTS: display the information corresponding to selected tour stop
-    public String displayTourStopDetails() {
-        return "";
+
+    //MODIFIES: this
+    //EFFECTS: adds a tour stop to the list of tour stops
+    public void addTourStop(TourStop tourStop) {
     }
 
-    public void addTourStop(){}
-
-    public void markAsVisited(){}
-
-    public void removeTourStop(){}
-
-    public String displayRecommendTourStops() {
-        return "";
+    //MODIFIES: this
+    //EFFECTS: sets isVisited field in the TourStop class to true
+    public void markAsVisited(TourStop tourStop) {
     }
 
-    public String displayUnvisitedStops() {
-        return "";
+    //MODIFIES: this
+    //EFFECTS: sets the stop to be revisited
+    public void markToBeRevisited() {
     }
 
-    public String displayVisitedStops() {
-        return "";
+    //MODIFIES: this
+    //EFFECTS: delete the given tour stop from the list
+    public void removeTourStop(TourStop tourStop) {
     }
+
 }
