@@ -1,44 +1,73 @@
 package model;
 
-public class TourStop {
-    //UBC campus places available to be visited during the tour
-    //Superclass that has generic methods that apply to all tour stops
+import java.util.Objects;
 
-    String name;
-    String location;
-    int recommendedDurationOfVisit;
-    FoodPlace nearestFoodPlace;
-    boolean isVisited;
-    boolean shouldRevisit;
+public abstract class TourStop {
+    //Provides the specification required for a tour stop at ubc
+    //it's  super type extended by different types of methods
+
+    protected String name;
+    protected FoodPlace nearestFoodPlace;
+    protected boolean isVisited;
+    protected boolean shouldRevisit;
+    protected String tourStopType;
+
 
     //EFFECTS: make an unvisited tour stop
-    public void tourStop(String name, String location){}
+    public TourStop(String name, String area){}
 
     //setter
-    public void setName(){}
+    public String getName(){
+        return "";
+    }
+
 
     //setter
-    public void setLocation(){}
+    public void setNearestFoodPlace(FoodPlace foodPlace){}
 
-    //setter
-    public void setRecommendedDurationOfVisit(){}
-
-    //setter
-    public void setNearestFoodPlace(){}
+    public String getNearestFoodPlace(){
+        return "";
+    }
 
     //getter
-    public boolean getIsVisited() {
+    public boolean isVisited() {
         return false;
     }
 
-    //setter
-    public void setVisited() {}
-
-    //getter
-    public boolean getShouldRevisit() {
+    //EFFECTS: if stop was not visited before, change status and return true
+    //         if should be revisited, return true and false otherwise
+    public boolean visit() {
         return false;
     }
 
-    //setter
-    public void setShouldRevisit() {}
+    public void shouldRevisit() {}
+
+    public abstract String getTourStopType();
+
+    //EFFECTS: to check if two tour stops are the same
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (! (o instanceof TourStop)) {
+            return false;
+        }
+
+        TourStop tourStop = (TourStop) o;
+        return name.equals(tourStop.name);
+    }
+
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+
+    public String getArea() {
+        return "";
+    }
+
+    public FoodPlace placeToEat(){
+        return null;
+    }
 }
+
