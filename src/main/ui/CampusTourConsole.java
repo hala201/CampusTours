@@ -11,6 +11,7 @@ public class CampusTourConsole {
     private Scanner input;
     private final TourRoute tourRoute = new TourRoute();
 
+
     public CampusTourConsole() throws IOException {
         runCampusTour();
     }
@@ -92,17 +93,30 @@ public class CampusTourConsole {
         }
         System.out.println("Done! We will customize your added stops based on your interest!");
         displayMenu();
+
     }
 
 
     private void viewVisitedStops() {
         System.out.println("Stops you visited are: \n");
-        tourRoute.displayVisitedStops();
+        displayVisitedStops();
     }
 
     private void viewNextStops() {
         System.out.println("Stops you are planning on visiting: \n");
-        tourRoute.displayNextStops();
+        displayNextStops();
+    }
+
+    public void displayNextStops() {
+        tourRoute.getUnvisitedRoute().forEach((key, value)
+                -> System.out.println(value.getName() + " " + value.getTourStopType()));
+    }
+
+    public void displayVisitedStops() {
+        tourRoute.getVisitedRoute().forEach((key, value)
+                -> System.out.println("You visited the following "
+                +
+                value.getTourStopType() + " : " + value));
     }
 
     private void visit() {

@@ -122,5 +122,19 @@ public class TourStopTest {
         assertTrue(museumOfAnthropology.visit());
     }
 
+    @Test
+    public void testShouldRevisit() {
+        buchanan.visit();
+        assertTrue(buchanan.isVisited());
+        buchanan.shouldRevisit();
+        assertTrue(buchanan.shouldRevisit);
+    }
+
+    @Test
+    public void testShouldRevisitNotVisitedYet() {
+        assertFalse(buchanan.isVisited());
+        assertFalse(buchanan.shouldRevisit);
+    }
+
 }
 

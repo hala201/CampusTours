@@ -1,13 +1,12 @@
 package model;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class TourRoute {
     String facultyOfInterest;
 
-    private HashMap<String, TourStop> tourRoute;
-    private HashMap<String, TourStop> visitedRoute;
+    protected HashMap<String, TourStop> unvisitedRoute;
+    protected HashMap<String, TourStop> visitedRoute;
     public final int maxSize = 4;
 
     //will be useful for the next phase
@@ -22,17 +21,17 @@ public class TourRoute {
     //EFFECTS: make a list of the visited and to be visited tour stops
     public TourRoute() {
         visitedRoute = new HashMap<>();
-        tourRoute = new HashMap<>();
+        unvisitedRoute = new HashMap<>();
     }
 
     //REQUIRE: should not exceed the maximum number of tour stops
     //MODIFIES: this
     //EFFECTS: adds a tour stop to the list of tour stops, returns true if added successfully
     public boolean addTourStop(TourStop tourStop) {
-        if (tourRoute.size() < maxSize) {
+        if (unvisitedRoute.size() < maxSize) {
             if (tourStop.getArea() == recommendArea()
                     && !containsTourStop(tourStop)) {
-                tourRoute.put(tourStop.getName(), tourStop);
+                unvisitedRoute.put(tourStop.getName(), tourStop);
                 return true;
             }
         }
@@ -40,33 +39,23 @@ public class TourRoute {
     }
 
     public TourStop getTourStopByName(String name) {
-        return tourRoute.get(name);
+        return unvisitedRoute.get(name);
     }
 
     //MODIFIES: this
     //EFFECTS: sets isVisited field in the TourStop class to true
-    public void markAsVisited(TourStop tourStop) {
-        if (tourRoute.containsValue(tourStop)) {
+    public boolean markAsVisited(TourStop tourStop) {
+        if (unvisitedRoute.containsValue(tourStop)) {
             tourStop.visit();
             visitedRoute.put(tourStop.name, tourStop);
+            return true;
         }
+        return false;
     }
 
-
-    public void displayNextStops() {
-        tourRoute.forEach((key, value)
-                -> System.out.println(value.getName() + " " + value.getTourStopType()));
-    }
-
-    public void displayVisitedStops() {
-        visitedRoute.forEach((key, value)
-                -> System.out.println("You visited the following "
-                +
-                value.getTourStopType() + " : " + value));
-    }
 
     public boolean containsTourStop(TourStop tourStop) {
-        return tourRoute.containsValue(tourStop);
+        return unvisitedRoute.containsValue(tourStop);
     }
 
 
@@ -75,7 +64,7 @@ public class TourRoute {
     }
 
     public int tourLength() {
-        return tourRoute.size();
+        return unvisitedRoute.size();
     }
 
 
@@ -83,11 +72,11 @@ public class TourRoute {
         if (facultyOfInterest == "LFS"
                 || facultyOfInterest == "Engineering"
                 || facultyOfInterest == "Forestry"
-                || facultyOfInterest == "KIN") {
+                || facultyOfInterest == "Kinesiology") {
             return "South";
         } else if (facultyOfInterest == "Science"
                 || facultyOfInterest == "Education"
-                || facultyOfInterest == "Busincess") {
+                || facultyOfInterest == "Business") {
             return "Center";
         } else if (facultyOfInterest == "Arts") {
             return "North";
@@ -101,6 +90,14 @@ public class TourRoute {
 
     public String getFacultyOfInterest() {
         return facultyOfInterest;
+    }
+
+    public HashMap<String, TourStop> getUnvisitedRoute() {
+        return unvisitedRoute;
+    }
+
+    public HashMap<String, TourStop> getVisitedRoute() {
+        return visitedRoute;
     }
 
 

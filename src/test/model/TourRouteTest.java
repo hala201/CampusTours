@@ -10,11 +10,11 @@ public class TourRouteTest {
 
     @BeforeEach
     public void setup() {
-        tourRoute =  new TourRoute();
+        tourRoute = new TourRoute();
     }
 
     @Test
-    public void testTourRouteConstructor(){
+    public void testTourRouteConstructor() {
         assertEquals(tourRoute.tourLength(), 0);
     }
 
@@ -27,6 +27,13 @@ public class TourRouteTest {
         assertFalse(tourRoute.containsVisitedTourStop(ikb));
         assertEquals(tourRoute.tourLength(), 1);
 
+    }
+
+    @Test
+    public void testAddTourStopAlreadyAdded() {
+        TourStop tourStop = new Library("IKB", "North");
+        assertTrue(tourRoute.addTourStop(tourStop));
+        assertFalse(tourRoute.addTourStop(tourStop));
     }
 
     @Test
@@ -50,16 +57,23 @@ public class TourRouteTest {
         tourRoute.addTourStop(koerner);
         tourRoute.addTourStop(museumOfAnthropology);
 
-        tourRoute.markAsVisited(buchanan);
-        tourRoute.markAsVisited(roseGarden);
+        assertTrue(tourRoute.containsTourStop(buchanan)
+        && tourRoute.containsTourStop(roseGarden));
+
+        assertTrue(tourRoute.markAsVisited(buchanan)
+        && tourRoute.markAsVisited(roseGarden));
 
         assertTrue(tourRoute.containsVisitedTourStop(buchanan)
-        && tourRoute.containsVisitedTourStop(roseGarden));
+                && tourRoute.containsVisitedTourStop(roseGarden));
 
-//        assertEquals(tourRoute.displayVisitedStops(),
-//                "Buchanan Building, Rose Garden");
-//        assertEquals(tourRoute.displayTourRoute(), "" +
-//                "Koerner Library, Museum Of Anthropology");
+
+    }
+
+    @Test
+    public void testMarkAsVisitedNotVisited() {
+        TourStop tourStop = new Library("IKB", "North");
+        assertFalse(tourRoute.containsVisitedTourStop(tourStop));
+        assertFalse(tourRoute.markAsVisited(tourStop));
     }
 
     @Test
@@ -77,7 +91,7 @@ public class TourRouteTest {
         tourRoute.addTourStop(koerner);
         tourRoute.addTourStop(museumOfAnthropology);
 
-        assertEquals(tourRoute.tourLength(),4);
+        assertEquals(tourRoute.tourLength(), 4);
 
         assertFalse(tourRoute.addTourStop(musicBuilding));
     }
@@ -95,7 +109,7 @@ public class TourRouteTest {
         tourRoute.addTourStop(roseGarden);
         tourRoute.addTourStop(museumOfAnthropology);
 
-        assertEquals(tourRoute.tourLength(),3);
+        assertEquals(tourRoute.tourLength(), 3);
 
         assertFalse(tourRoute.addTourStop(ed));
     }
@@ -115,7 +129,7 @@ public class TourRouteTest {
         tourRoute.addTourStop(koerner);
         tourRoute.addTourStop(museumOfAnthropology);
 
-        assertEquals(tourRoute.tourLength(),4);
+        assertEquals(tourRoute.tourLength(), 4);
         assertTrue(tourRoute.tourLength() >= tourRoute.maxSize);
 
         assertFalse(tourRoute.addTourStop(ed));
@@ -125,18 +139,28 @@ public class TourRouteTest {
     public void testRecommendAre() {
         tourRoute.setFacultyOfInterest("LFS");
         assertEquals(tourRoute.recommendArea(), "South");
+        tourRoute.setFacultyOfInterest("Engineering");
+        assertEquals(tourRoute.recommendArea(), "South");
+        tourRoute.setFacultyOfInterest("Kinesiology");
+        assertEquals(tourRoute.recommendArea(), "South");
+        tourRoute.setFacultyOfInterest("Forestry");
+        assertEquals(tourRoute.recommendArea(), "South");
 
         tourRoute.setFacultyOfInterest("Science");
         assertEquals(tourRoute.recommendArea(), "Center");
+        tourRoute.setFacultyOfInterest("Education");
+        assertEquals(tourRoute.recommendArea(), "Center");
+        tourRoute.setFacultyOfInterest("Business");
+        assertEquals(tourRoute.recommendArea(), "Center");
+
         tourRoute.setFacultyOfInterest("Arts");
         assertEquals(tourRoute.recommendArea(), "North");
-
         tourRoute.setFacultyOfInterest(null);
         assertEquals(tourRoute.recommendArea(), "North");
     }
 
     @Test
-    public void testGetTourStopByName(){
+    public void testGetTourStopByName() {
         TourStop tourStop = new Library("IKB", "North");
         tourRoute.addTourStop(tourStop);
         assertEquals(tourStop, tourRoute.getTourStopByName("IKB"));
@@ -146,40 +170,5 @@ public class TourRouteTest {
     public void testSetFacultyOfInterest() {
         tourRoute.setFacultyOfInterest("LFS");
         assertEquals(tourRoute.getFacultyOfInterest(), "LFS");
-    }
-
-    @Test
-    public void testDisplayNextStops() {
-        TourStop buchanan = new FacultyBuilding("Buchanan Building", "North");
-        tourRoute.addTourStop(buchanan);
-        assertEquals(tourRoute.tourLength(), 1);
-       // assertEquals(tourRoute.displayNextStops(), "Buchanan Building Faculty Building");
-
-    }
-
-    @Test
-    public void testDisplayManyNextStops() {
-        TourStop buchanan = new FacultyBuilding("Buchanan Building", "North");
-        TourStop roseGarden = new Garden("Rose Garden", "North");
-        TourStop koerner = new Library("Koerner Library", "North");
-        TourStop museumOfAnthropology = new Museum("Museum of Anthropology", "North");
-        TourStop ed = new Library("UBC Education Library", "North");
-
-        assertEquals(tourRoute.tourLength(), 0);
-
-        tourRoute.addTourStop(buchanan);
-        tourRoute.addTourStop(roseGarden);
-        tourRoute.addTourStop(koerner);
-        tourRoute.addTourStop(museumOfAnthropology);
-    }
-
-    @Test
-    public void testDisplayEmptyVisitedStops() {
-
-    }
-
-    @Test
-    public void testDisplayVisitedStops() {
-
     }
 }
