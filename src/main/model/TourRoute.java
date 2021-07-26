@@ -1,14 +1,14 @@
 package model;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class TourRoute {
-    int totalDuration;
     String facultyOfInterest;
 
-    private HashMap<String, TourStop> tourRoute;
-    private HashMap<String, TourStop> visitedRoute;
-    private int maxSize = 4;
+    public HashMap<String, TourStop> tourRoute;
+    public HashMap<String, TourStop> visitedRoute;
+    public int maxSize = 4;
 
     //will be useful for the next phase
 //    public final String listCenter = "";
@@ -40,6 +40,10 @@ public class TourRoute {
         return false;
     }
 
+    public TourStop getTourStopByName(String name) {
+        return tourRoute.get(name);
+    }
+
     //MODIFIES: this
     //EFFECTS: sets isVisited field in the TourStop class to true
     public void markAsVisited(TourStop tourStop) {
@@ -50,33 +54,24 @@ public class TourRoute {
     }
 
 
-
-    public StringBuffer displayVisitedStop(String name) {
-        TourStop tourStop = visitedRoute.get(name);
-
-        StringBuffer s1 = new StringBuffer("Tour stop: ");
-        s1.append(tourStop.getName()).append(" , visited");
-        return s1;
+    public void displayNextStops() {
+        visitedRoute.forEach((key, value)
+                -> System.out.println("Next "
+                +
+                value.getTourStopType() + "stop : " + value));
     }
 
-    public String displayVisitedStops() {
-        return TourPrint.printList(visitedRoute);
-    }
-
-    public String displayTourRoute() {
-        return TourPrint.printList(tourRoute);
+    public void displayVisitedStops() {
+        visitedRoute.forEach((key, value)
+                -> System.out.println("You visited the following "
+                +
+                value.getTourStopType() + " : " + value));
     }
 
     public boolean containsTourStop(TourStop tourStop) {
         return tourRoute.containsValue(tourStop);
     }
 
-//    public boolean containsVisitedStopType(TourStop tourStop) {
-//        tourRoute.forEach(
-//                (key, value)
-//        -> value.getTourStopType());
-//
-//    }
 
     public boolean containsVisitedTourStop(TourStop tourStop) {
         return visitedRoute.containsValue(tourStop);
@@ -97,8 +92,7 @@ public class TourRoute {
                 || facultyOfInterest == "Education"
                 || facultyOfInterest == "Busincess") {
             return "Center";
-        } else if (facultyOfInterest == "Arts"
-                || facultyOfInterest == "Fine Arts") {
+        } else if (facultyOfInterest == "Arts") {
             return "North";
         }
         return "North";
