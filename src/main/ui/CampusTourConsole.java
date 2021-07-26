@@ -119,24 +119,33 @@ public class CampusTourConsole {
             System.out.println("Choose the type of your stop: ");
             System.out.println("\tL for Library\tG for Garden\tM for Museum\tFB for Faculty Building");
             String chosenType = input.next();
-            if (chosenType.equals("L")) {
-                Library library = new Library(name, tourRoute.recommendArea());
-                tourRoute.addTourStop(library);
-            } else if (chosenType.equals("G")) {
-                Garden garden = new Garden(name, tourRoute.recommendArea());
-                tourRoute.addTourStop(garden);
-            } else if (chosenType.equals("M")) {
-                Museum museum = new Museum(name, tourRoute.recommendArea());
-                tourRoute.addTourStop(museum);
-            } else if (chosenType.equals("FB")) {
-                FacultyBuilding facultyBuilding = new FacultyBuilding(name, tourRoute.recommendArea());
-                tourRoute.addTourStop(facultyBuilding);
-            }
+            specifyStopType(chosenType, name);
             displayTourLength();
         } else {
             System.out.println("Exceeded the maximum tour length");
         }
         displayMenu();
+    }
+
+    private void specifyStopType(String chosenType, String name) {
+        switch (chosenType) {
+            case "L":
+                Library library = new Library(name, tourRoute.recommendArea());
+                tourRoute.addTourStop(library);
+                break;
+            case "G":
+                Garden garden = new Garden(name, tourRoute.recommendArea());
+                tourRoute.addTourStop(garden);
+                break;
+            case "M":
+                Museum museum = new Museum(name, tourRoute.recommendArea());
+                tourRoute.addTourStop(museum);
+                break;
+            case "FB":
+                FacultyBuilding facultyBuilding = new FacultyBuilding(name, tourRoute.recommendArea());
+                tourRoute.addTourStop(facultyBuilding);
+                break;
+        }
     }
 
     public void displayTourLength() {

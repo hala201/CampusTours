@@ -86,7 +86,6 @@ public class TourRouteTest {
     public void testAddUnrecommendedStops() {
         TourStop buchanan = new FacultyBuilding("Buchanan Building", "North");
         TourStop roseGarden = new Garden("Rose Garden", "North");
-        TourStop koerner = new Library("Koerner Library", "North");
         TourStop museumOfAnthropology = new Museum("Museum of Anthropology", "North");
         TourStop ed = new Library("UBC Education Library", "Center");
 
