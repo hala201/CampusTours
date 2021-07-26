@@ -6,19 +6,21 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class CampusTourConsole {
-    // function that displays information about my tour
+    // my UBC campus tour console application
 
     private Scanner input;
     private final TourRoute tourRoute = new TourRoute();
 
-
+    //EFFECTS: runs the campus tour application
     public CampusTourConsole() throws IOException {
         runCampusTour();
     }
 
+    //MODIFIES: this
+    //EFFECTS: process user input
     private void runCampusTour() throws IOException {
         boolean keepGoing = true;
-        String command = null;
+        String command;
         input = new Scanner(System.in);
         displayMenu();
 
@@ -32,50 +34,57 @@ public class CampusTourConsole {
                 processCommand(command);
             }
         }
-
         System.out.println("\nSee you in an upcoming tour!");
     }
 
 
+    //EFFECTS: displays options menu for user
     private void displayMenu() {
         System.out.println("\nSelect from: ");
-        System.out.println("\ta -> add a tour stop");
-        System.out.println("\tv -> visit tour stop");
-        System.out.println("\tn -> view next stops");
+        System.out.println("\ta -> Add a tour stop");
+        System.out.println("\ts -> Start tour and visit stop");
+        System.out.println("\tn -> view Next stops");
         System.out.println("\tv -> view Visited stops");
-        System.out.println("\tc -> allow customization according to faculty");
+        System.out.println("\tc -> allow Customization according to faculty");
         System.out.println("\tq -> quit");
 
     }
 
-    private void processCommand(String command) throws IOException {
-        if (command.equals("a")) {
-            addTourStop();
+    //MODIFIES: this
+    //EFFECTS: processes user commands
+    private void processCommand(String command) {
+        switch (command) {
+            case "a":
+                addTourStop();
+                break;
+            case "s":
+                visit();
+                break;
+            case "n":
+                viewNextStops();
+                break;
+            case "v":
+                viewVisitedStops();
+                break;
+            case "c":
+                allowCustomization();
+                break;
+            default:
+                System.out.println("Not a valid selection...");
+                break;
         }
-        if (command.equals("v")) {
-            visit();
-        }
-        if (command.equals("n")) {
-            viewNextStops();
-        }
-        if (command.equals("v")) {
-            viewVisitedStops();
-        }
-        if (command.equals("c")) {
-            allowCustomization();
-//        } else {
-//            System.out.println("Not a valid selection...");
-//        }
-        }
+
     }
 
+    //MODIFIES: this
+    //EFFECTS: specifies the area of stops based on faculty of interest
     public void allowCustomization() {
         System.out.println("Select your faculty of interest: ");
         System.out.println("\tl -> LFS");
         System.out.println("\tf -> Forestry");
         System.out.println("\te -> Engineering");
         System.out.println("\tk -> Kinesiology");
-        System.out.println("\te -> education");
+        System.out.println("\ted -> education");
         System.out.println("\ts -> Science");
         System.out.println("\tb -> Business");
         System.out.println("\ta -> Arts");
@@ -84,50 +93,68 @@ public class CampusTourConsole {
                 || chosenFaculty == "k") {
             tourRoute.setFacultyOfInterest("LFS");
             tourRoute.recommendArea();
-        } else if (chosenFaculty == "s" || chosenFaculty == "b" || chosenFaculty == "e") {
+        } else if (chosenFaculty == "s" || chosenFaculty == "b" || chosenFaculty == "ed") {
             tourRoute.setFacultyOfInterest("Sciences");
             tourRoute.recommendArea();
         } else {
             tourRoute.setFacultyOfInterest("Arts");
             tourRoute.recommendArea();
         }
-        System.out.println("Done! We will customize your added stops based on your interest!");
+        System.out.println("Done! We will customize your added stops based on your indicated interest!");
         displayMenu();
 
     }
 
-
+    //EFFECTS: displays the visited tour stops
     private void viewVisitedStops() {
-        System.out.println("Stops you visited are: \n");
-        displayVisitedStops();
+        if (tourRoute.getVisitedRoute().size() == 0) {
+            System.out.println("You haven't visited any stops yet");
+        } else {
+            System.out.println("Stops you visited are: \n");
+            tourRoute.getVisitedRoute().forEach((key, value)
+                    -> System.out.println(value.getName() + " " + value.getTourStopType()));
+        }
     }
 
+    //EFFECTS: displays the stops to be visited
     private void viewNextStops() {
-        System.out.println("Stops you are planning on visiting: \n");
-        displayNextStops();
+        if (tourRoute.tourLength() == 0) {
+            System.out.println("You haven't added any stops yet");
+        } else {
+            System.out.println("Stops you are planning on visiting: \n");
+            tourRoute.getToBeVisitedRoute().forEach((key, value)
+                    -> System.out.println(value.getName() + " " + value.getTourStopType()));
+        }
     }
 
-    public void displayNextStops() {
-        tourRoute.getUnvisitedRoute().forEach((key, value)
-                -> System.out.println(value.getName() + " " + value.getTourStopType()));
-    }
-
-    public void displayVisitedStops() {
-        tourRoute.getVisitedRoute().forEach((key, value)
-                -> System.out.println("You visited the following "
-                +
-                value.getTourStopType() + " : " + value));
-    }
-
+    //MODIFIES: this
+    //EFFECTS: marks the entered stop as visited and gives the tour stop details
     private void visit() {
         System.out.println("Enter name of stop to visit: ");
         String name = input.next();
         TourStop tourStop = tourRoute.getTourStopByName(name);
-        tourRoute.markAsVisited(tourStop);
+        if (tourRoute.containsTourStop(tourStop)) {
+            tourRoute.markAsVisited(tourStop);
+            // more functionality will be added, needs external data
+            System.out.println("You are currently visiting " + name + " "
+                    +
+                    tourStop.getTourStopType() + ".....");
+            System.out.println("Press 'e' to end the tour in this stop");
+            String isEnded = input.next();
+            if (isEnded.equals("e")) {
+                System.out.println("We hope you enjoyed exploring " + name + "!!");
+                displayMenu();
+            }
+        } else {
+            System.out.println("please add this stop first");
+            displayMenu();
+        }
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds the entered tour stop if it wouldn't exceed maximum tour length
     public void addTourStop() {
-        if (tourRoute.maxSize > tourRoute.tourLength()) {
+        if (tourRoute.maxStopsCount > tourRoute.tourLength()) {
             System.out.println("Enter Name to add");
             String name = input.next();
             System.out.println("Choose the type of your stop: ");
@@ -141,6 +168,8 @@ public class CampusTourConsole {
         displayMenu();
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs the specific tour stop type, helper to addTourStop
     private void specifyStopType(String chosenType, String name) {
         switch (chosenType) {
             case "L":
@@ -159,13 +188,15 @@ public class CampusTourConsole {
                 FacultyBuilding facultyBuilding = new FacultyBuilding(name, tourRoute.recommendArea());
                 tourRoute.addTourStop(facultyBuilding);
                 break;
+            default:
+                System.out.println("Not a valid selection...");
+                break;
         }
     }
 
+    //EFFECTS: displays the current tour length
     public void displayTourLength() {
         System.out.println("You have " + tourRoute.tourLength() + " stops to visit");
     }
-
-
 }
 

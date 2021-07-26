@@ -133,6 +133,7 @@ public class TourStopTest {
     @Test
     public void testShouldRevisitNotVisitedYet() {
         assertFalse(buchanan.isVisited());
+        buchanan.shouldRevisit();
         assertFalse(buchanan.shouldRevisit);
     }
 

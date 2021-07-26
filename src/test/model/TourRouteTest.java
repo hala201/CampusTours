@@ -130,7 +130,7 @@ public class TourRouteTest {
         tourRoute.addTourStop(museumOfAnthropology);
 
         assertEquals(tourRoute.tourLength(), 4);
-        assertTrue(tourRoute.tourLength() >= tourRoute.maxSize);
+        assertTrue(tourRoute.tourLength() >= tourRoute.maxStopsCount);
 
         assertFalse(tourRoute.addTourStop(ed));
     }
@@ -170,5 +170,17 @@ public class TourRouteTest {
     public void testSetFacultyOfInterest() {
         tourRoute.setFacultyOfInterest("LFS");
         assertEquals(tourRoute.getFacultyOfInterest(), "LFS");
+    }
+
+    @Test
+    public void testGetVisitedRoute() {
+        assertEquals(tourRoute.getVisitedRoute(),
+                tourRoute.visitedRoute);
+    }
+
+    @Test
+    public void testGetUnvisitedRoute() {
+        assertEquals(tourRoute.getToBeVisitedRoute(),
+                tourRoute.getToBeVisitedRoute());
     }
 }

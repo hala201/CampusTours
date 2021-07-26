@@ -3,49 +3,46 @@ package model;
 import java.util.HashMap;
 
 public class TourRoute {
-    String facultyOfInterest;
+    // A list of tour stops
 
-    protected HashMap<String, TourStop> unvisitedRoute;
+    protected HashMap<String, TourStop> toBeVisitedRoute;
     protected HashMap<String, TourStop> visitedRoute;
-    public final int maxSize = 4;
+    public final int maxStopsCount = 4;
+    protected String facultyOfInterest;
 
-    //will be useful for the next phase
-//    public final String listCenter = "";
-//    public final String listNorth = "";
-//    public final String listSouth = "";
-
-    //for now I resolved that by requiring the add to add compatible stops
-
-    //REQUIRE: all tour stops must be in the same area
-    //         tour does not exceed 5 stops
     //EFFECTS: make a list of the visited and to be visited tour stops
     public TourRoute() {
         visitedRoute = new HashMap<>();
-        unvisitedRoute = new HashMap<>();
+        toBeVisitedRoute = new HashMap<>();
     }
 
-    //REQUIRE: should not exceed the maximum number of tour stops
+    // will handle with an exception
+    //REQUIRE: toBeVisitedRoute.size() < maxStopsCount
     //MODIFIES: this
-    //EFFECTS: adds a tour stop to the list of tour stops, returns true if added successfully
+    //EFFECTS: adds tour stop to the list of upcoming tour stops
+    //        if tourStop is not be already in the list and
+    //        its location is in the recommended area
+    //        returns true if added successfully and false otherwise
     public boolean addTourStop(TourStop tourStop) {
-        if (unvisitedRoute.size() < maxSize) {
+        if (toBeVisitedRoute.size() < maxStopsCount) {
             if (tourStop.getArea() == recommendArea()
                     && !containsTourStop(tourStop)) {
-                unvisitedRoute.put(tourStop.getName(), tourStop);
+                toBeVisitedRoute.put(tourStop.getName(), tourStop);
                 return true;
             }
         }
         return false;
     }
 
+    //EFFECTS: returns the TourStop in toBeVisited given its name
     public TourStop getTourStopByName(String name) {
-        return unvisitedRoute.get(name);
+        return toBeVisitedRoute.get(name);
     }
 
     //MODIFIES: this
     //EFFECTS: sets isVisited field in the TourStop class to true
     public boolean markAsVisited(TourStop tourStop) {
-        if (unvisitedRoute.containsValue(tourStop)) {
+        if (toBeVisitedRoute.containsValue(tourStop)) {
             tourStop.visit();
             visitedRoute.put(tourStop.name, tourStop);
             return true;
@@ -53,21 +50,23 @@ public class TourRoute {
         return false;
     }
 
-
+    //EFFECTS: return true if given tour stop is in toBeVisitedRoute and false otherwise
     public boolean containsTourStop(TourStop tourStop) {
-        return unvisitedRoute.containsValue(tourStop);
+        return toBeVisitedRoute.containsValue(tourStop);
     }
 
-
+    //EFFECTS: return true if given tour stop is in unvisitedRoute and false otherwise
     public boolean containsVisitedTourStop(TourStop tourStop) {
         return visitedRoute.containsValue(tourStop);
     }
 
+    //EFFECTS: return the number of stops in the tour route
     public int tourLength() {
-        return unvisitedRoute.size();
+        return toBeVisitedRoute.size();
     }
 
-
+    // EFFECTS: returns the area of most relevant tour stops to faculty of interest
+    //          if there is no preference, returns "North" where more diverse tour stops are
     public String recommendArea() {
         if (facultyOfInterest == "LFS"
                 || facultyOfInterest == "Engineering"
@@ -84,21 +83,23 @@ public class TourRoute {
         return "North";
     }
 
+    // setter
     public void setFacultyOfInterest(String faculty) {
         facultyOfInterest = faculty;
     }
 
+    // getter
     public String getFacultyOfInterest() {
         return facultyOfInterest;
     }
 
-    public HashMap<String, TourStop> getUnvisitedRoute() {
-        return unvisitedRoute;
+    //EFFECTS: returns tour stops to be visited
+    public HashMap<String, TourStop> getToBeVisitedRoute() {
+        return toBeVisitedRoute;
     }
 
+    //EFFECTS: returns visited tour stops
     public HashMap<String, TourStop> getVisitedRoute() {
         return visitedRoute;
     }
-
-
 }
