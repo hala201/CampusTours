@@ -12,8 +12,6 @@ public abstract class TourStop {
     protected boolean isVisited;
     protected boolean shouldRevisit;
 
-
-
     //EFFECTS: make an unvisited tour stop
     public TourStop(String name, String area) {
         this.name = name;
@@ -63,7 +61,6 @@ public abstract class TourStop {
     }
 
     public abstract String getTourStopType();
-
 
 }
 

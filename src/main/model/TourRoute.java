@@ -54,15 +54,15 @@ public class TourRoute {
 
 
     public void displayNextStops() {
-        tourRoute.forEach((key, value)
-                -> System.out.println(value.getName() + " " + value.getTourStopType()));
+//        tourRoute.forEach((key, value)
+//                -> System.out.println(value.getName() + " " + value.getTourStopType()));
     }
 
     public void displayVisitedStops() {
-        visitedRoute.forEach((key, value)
-                -> System.out.println("You visited the following "
-                +
-                value.getTourStopType() + " : " + value));
+//        visitedRoute.forEach((key, value)
+//                -> System.out.println("You visited the following "
+//                +
+//                value.getTourStopType() + " : " + value));
     }
 
     public boolean containsTourStop(TourStop tourStop) {
