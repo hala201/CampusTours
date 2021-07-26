@@ -6,9 +6,9 @@ import java.util.Map;
 public class TourRoute {
     String facultyOfInterest;
 
-    public HashMap<String, TourStop> tourRoute;
-    public HashMap<String, TourStop> visitedRoute;
-    public int maxSize = 4;
+    private HashMap<String, TourStop> tourRoute;
+    private HashMap<String, TourStop> visitedRoute;
+    public final int maxSize = 4;
 
     //will be useful for the next phase
 //    public final String listCenter = "";
