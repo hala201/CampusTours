@@ -8,6 +8,6 @@ public class FacultyBuilding extends TourStop {
 
     @Override
     public String getTourStopType() {
-        return "";
+        return "Faculty Building";
     }
 }

@@ -9,6 +9,6 @@ public class Garden extends TourStop {
 
     @Override
     public String getTourStopType() {
-        return "";
+        return "Garden";
     }
 }

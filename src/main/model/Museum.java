@@ -7,6 +7,6 @@ public class Museum extends TourStop {
 
     @Override
     public String getTourStopType() {
-        return "";
+        return "Museum";
     }
 }

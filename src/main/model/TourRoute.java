@@ -1,8 +1,6 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class TourRoute {
     int totalDuration;
@@ -10,74 +8,105 @@ public class TourRoute {
 
     private HashMap<String, TourStop> tourRoute;
     private HashMap<String, TourStop> visitedRoute;
-    private int maxSize = 5;
+    private int maxSize = 4;
 
+    //will be useful for the next phase
+//    public final String listCenter = "";
+//    public final String listNorth = "";
+//    public final String listSouth = "";
 
-    //EFFECTS: make a list of the visited and unvisited stops
+    //for now I resolved that by requiring the add to add compatible stops
+
+    //REQUIRE: all tour stops must be in the same area
+    //         tour does not exceed 5 stops
+    //EFFECTS: make a list of the visited and to be visited tour stops
     public TourRoute() {
-    }
-
-
-    //EFFECTS: selects a tour route according to faculty
-    //           - Arts/Fine Arts: North end of main mall
-    //           - Engineering/LFS/KIN/ south end of main mall
-    //           - Science/Sauder/Education center of main mall
-    //         adds two food place by default
-    //         maximum duration of each route is 2 hours
-    public TourRoute displayRecommendTourStops(String faculty) {
-        return null;
+        visitedRoute = new HashMap<>();
+        tourRoute = new HashMap<>();
     }
 
     //REQUIRE: should not exceed the maximum number of tour stops
     //MODIFIES: this
-    //EFFECTS: adds a tour stop to the list of tour stops
-    public void addTourStop(TourStop tourStop) {
+    //EFFECTS: adds a tour stop to the list of tour stops, returns true if added successfully
+    public boolean addTourStop(TourStop tourStop) {
+
+        if (tourRoute.size() <= maxSize
+                && !containsTourStop(tourStop)) {
+            if (tourStop.getArea() == recommendArea()) {
+                tourRoute.put(tourStop.getName(), tourStop);
+                return true;
+            }
+        }
+        return false;
     }
 
     //MODIFIES: this
     //EFFECTS: sets isVisited field in the TourStop class to true
     public void markAsVisited(TourStop tourStop) {
+        if (tourRoute.containsValue(tourStop)) {
+            tourStop.visit();
+            visitedRoute.put(tourStop.name, tourStop);
+        }
     }
 
-    public String displayVisitedStop(String name) {
-        return "";
+
+
+    public StringBuffer displayVisitedStop(String name) {
+        TourStop tourStop = visitedRoute.get(name);
+
+        StringBuffer s1 = new StringBuffer("Tour stop: ");
+        s1.append(tourStop.getName()).append(" , visited");
+        return s1;
     }
 
     public String displayVisitedStops() {
-        return "";
+        return TourPrint.printList(visitedRoute);
     }
 
     public String displayTourRoute() {
-        return "";
+        return TourPrint.printList(tourRoute);
     }
 
-    public boolean containsUnvisitedTourStop() {
-        return false;
+    public boolean containsTourStop(TourStop tourStop) {
+        return tourRoute.containsValue(tourStop);
     }
 
-    public boolean containsVisitedTourStop() {
-        return false;
+//    public boolean containsVisitedStopType(TourStop tourStop) {
+//        tourRoute.forEach(
+//                (key, value)
+//        -> value.getTourStopType());
+//
+//    }
+
+    public boolean containsVisitedTourStop(TourStop tourStop) {
+        return visitedRoute.containsValue(tourStop);
     }
 
     public int tourLength() {
-        return 0;
+        return tourRoute.size();
     }
 
-    public void load(TourRoute route) {
 
+    public String recommendArea() {
+        if (facultyOfInterest == "LFS"
+                || facultyOfInterest == "Engineering"
+                || facultyOfInterest == "Forestry"
+                || facultyOfInterest == "KIN") {
+            return "South";
+        } else if (facultyOfInterest == "Science"
+                || facultyOfInterest == "Education"
+                || facultyOfInterest == "Busincess") {
+            return "Center";
+        } else if (facultyOfInterest == "Arts"
+                || facultyOfInterest == "Fine Arts") {
+            return "North";
+        }
+        return "North";
     }
 
-    public void save(TourRoute route) {
-
+    public void setFacultyOfInterest(String faculty) {
+        facultyOfInterest = faculty;
     }
-//    //MODIFIES: this
-//    //EFFECTS: sets the stop to be revisited
-//    public void markToBeRevisited() {
-//    }
 
-    //MODIFIES: this
-    //EFFECTS: delete the given tour stop from the list
-    public void removeTourStop(TourStop tourStop) {
-    }
 
 }

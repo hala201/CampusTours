@@ -26,7 +26,8 @@ public class TourStopTest {
     @Test
     public void testFoodPlaceConstructor() {
         FoodPlace foodPlace = new FoodPlace("Food Place");
-        assertEquals("Food Place", foodPlace.getName());
+        buchanan.setNearestFoodPlace(foodPlace);
+        assertEquals(foodPlace, buchanan.placeToEat());
     }
 
     @Test
@@ -105,7 +106,7 @@ public class TourStopTest {
         FoodPlace moa = new FoodPlace("Museum Of Anthropology Cafe");
         museumOfAnthropology.setNearestFoodPlace(moa);
         assertEquals(museumOfAnthropology.placeToEat(), moa);
-        assertEquals(museumOfAnthropology.getName(), "Museum Of Anthropology");
+        assertEquals(museumOfAnthropology.getName(), "Museum of Anthropology");
         assertEquals(museumOfAnthropology.getArea(), "North");
         assertEquals(museumOfAnthropology.getTourStopType(), "Museum");
         assertFalse(museumOfAnthropology.isVisited());

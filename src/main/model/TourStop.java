@@ -7,67 +7,63 @@ public abstract class TourStop {
     //it's  super type extended by different types of methods
 
     protected String name;
+    protected String area;
     protected FoodPlace nearestFoodPlace;
     protected boolean isVisited;
     protected boolean shouldRevisit;
-    protected String tourStopType;
+
 
 
     //EFFECTS: make an unvisited tour stop
-    public TourStop(String name, String area){}
+    public TourStop(String name, String area) {
+        this.name = name;
+        this.area = area;
+        isVisited = false;
+        shouldRevisit = false;
+    }
 
     //setter
-    public String getName(){
-        return "";
+    public String getName() {
+        return name;
     }
 
 
     //setter
-    public void setNearestFoodPlace(FoodPlace foodPlace){}
+    public void setNearestFoodPlace(FoodPlace foodPlace) {
+        this.nearestFoodPlace = foodPlace;
+    }
 
-    public String getNearestFoodPlace(){
-        return "";
+    public String getArea() {
+        return area;
+    }
+
+    public FoodPlace placeToEat() {
+        return nearestFoodPlace;
     }
 
     //getter
     public boolean isVisited() {
-        return false;
+        return isVisited;
     }
 
     //EFFECTS: if stop was not visited before, change status and return true
     //         if should be revisited, return true and false otherwise
     public boolean visit() {
+        if (shouldRevisit || !isVisited) {
+            isVisited = true;
+            return true;
+        }
         return false;
     }
 
-    public void shouldRevisit() {}
+    public void shouldRevisit() {
+        if (isVisited) {
+            shouldRevisit = true;
+        }
+    }
 
     public abstract String getTourStopType();
 
-    //EFFECTS: to check if two tour stops are the same
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
 
-        if (! (o instanceof TourStop)) {
-            return false;
-        }
-
-        TourStop tourStop = (TourStop) o;
-        return name.equals(tourStop.name);
-    }
-
-    public int hashCode() {
-        return Objects.hash(name);
-    }
-
-    public String getArea() {
-        return "";
-    }
-
-    public FoodPlace placeToEat(){
-        return null;
-    }
 }
 
