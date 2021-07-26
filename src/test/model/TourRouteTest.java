@@ -25,6 +25,8 @@ public class TourRouteTest {
         tourRoute.addTourStop(ikb);
         assertTrue(tourRoute.containsTourStop(ikb));
         assertFalse(tourRoute.containsVisitedTourStop(ikb));
+        assertEquals(tourRoute.tourLength(), 1);
+
     }
 
     @Test
@@ -77,7 +79,7 @@ public class TourRouteTest {
 
         assertEquals(tourRoute.tourLength(),4);
 
-        assertTrue(tourRoute.addTourStop(musicBuilding));
+        assertFalse(tourRoute.addTourStop(musicBuilding));
     }
 
     @Test
@@ -92,10 +94,30 @@ public class TourRouteTest {
 
         tourRoute.addTourStop(buchanan);
         tourRoute.addTourStop(roseGarden);
+        tourRoute.addTourStop(museumOfAnthropology);
+
+        assertEquals(tourRoute.tourLength(),3);
+
+        assertFalse(tourRoute.addTourStop(ed));
+    }
+
+    @Test
+    public void testExceedLimit() {
+        TourStop buchanan = new FacultyBuilding("Buchanan Building", "North");
+        TourStop roseGarden = new Garden("Rose Garden", "North");
+        TourStop koerner = new Library("Koerner Library", "North");
+        TourStop museumOfAnthropology = new Museum("Museum of Anthropology", "North");
+        TourStop ed = new Library("UBC Education Library", "North");
+
+        assertEquals(tourRoute.tourLength(), 0);
+
+        tourRoute.addTourStop(buchanan);
+        tourRoute.addTourStop(roseGarden);
         tourRoute.addTourStop(koerner);
         tourRoute.addTourStop(museumOfAnthropology);
 
         assertEquals(tourRoute.tourLength(),4);
+        assertTrue(tourRoute.tourLength() >= tourRoute.maxSize);
 
         assertFalse(tourRoute.addTourStop(ed));
     }

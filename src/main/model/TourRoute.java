@@ -29,10 +29,9 @@ public class TourRoute {
     //MODIFIES: this
     //EFFECTS: adds a tour stop to the list of tour stops, returns true if added successfully
     public boolean addTourStop(TourStop tourStop) {
-
-        if (tourRoute.size() <= maxSize
-                && !containsTourStop(tourStop)) {
-            if (tourStop.getArea() == recommendArea()) {
+        if (tourRoute.size() < maxSize) {
+            if (tourStop.getArea() == recommendArea()
+                    && !containsTourStop(tourStop)) {
                 tourRoute.put(tourStop.getName(), tourStop);
                 return true;
             }
@@ -55,10 +54,8 @@ public class TourRoute {
 
 
     public void displayNextStops() {
-        visitedRoute.forEach((key, value)
-                -> System.out.println("Next "
-                +
-                value.getTourStopType() + "stop : " + value));
+        tourRoute.forEach((key, value)
+                -> System.out.println(value.getName() + " " + value.getTourStopType()));
     }
 
     public void displayVisitedStops() {

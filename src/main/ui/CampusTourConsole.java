@@ -37,7 +37,7 @@ public class CampusTourConsole {
 
 
     private void displayMenu() {
-        System.out.println("\nSelect your Faculty of Interest: ");
+        System.out.println("\nSelect from: ");
         System.out.println("\ta -> add a tour stop");
         System.out.println("\tv -> visit tour stop");
         System.out.println("\tn -> view next stops");
@@ -62,26 +62,24 @@ public class CampusTourConsole {
         }
         if (command.equals("c")) {
             allowCustomization();
-        } else {
-            System.out.println("Not a valid selection...");
+//        } else {
+//            System.out.println("Not a valid selection...");
+//        }
         }
     }
 
-
     public void allowCustomization() {
         System.out.println("Select your faculty of interest: ");
-        System.out.println("\nl -> LFS");
-        System.out.println("\nf -> Forestry");
-        System.out.println("\ne -> Engineering");
-        System.out.println("\nk -> Kinesiology");
-        System.out.println("\ne -> education");
-        System.out.println("\ns -> Science");
-        System.out.println("\nb -> Business");
-        System.out.println("\na -> Arts");
+        System.out.println("\tl -> LFS");
+        System.out.println("\tf -> Forestry");
+        System.out.println("\te -> Engineering");
+        System.out.println("\tk -> Kinesiology");
+        System.out.println("\te -> education");
+        System.out.println("\ts -> Science");
+        System.out.println("\tb -> Business");
+        System.out.println("\ta -> Arts");
         String chosenFaculty = input.next();
-        if (chosenFaculty == "l"
-                || chosenFaculty == "f"
-                || chosenFaculty == "e"
+        if (chosenFaculty == "l" || chosenFaculty == "f" || chosenFaculty == "e"
                 || chosenFaculty == "k") {
             tourRoute.setFacultyOfInterest("LFS");
             tourRoute.recommendArea();
@@ -92,6 +90,8 @@ public class CampusTourConsole {
             tourRoute.setFacultyOfInterest("Arts");
             tourRoute.recommendArea();
         }
+        System.out.println("Done! We will customize your added stops based on your interest!");
+        displayMenu();
     }
 
 
@@ -113,11 +113,11 @@ public class CampusTourConsole {
     }
 
     public void addTourStop() {
-        if (tourRoute.maxSize >= tourRoute.tourLength()) {
+        if (tourRoute.maxSize > tourRoute.tourLength()) {
             System.out.println("Enter Name to add");
             String name = input.next();
             System.out.println("Choose the type of your stop: ");
-            System.out.println("\nL for Library,\nG for Garden,\nM for Museum,+\nFB for Faculty Building");
+            System.out.println("\tL for Library\tG for Garden\tM for Museum\tFB for Faculty Building");
             String chosenType = input.next();
             if (chosenType.equals("L")) {
                 Library library = new Library(name, tourRoute.recommendArea());
@@ -132,11 +132,15 @@ public class CampusTourConsole {
                 FacultyBuilding facultyBuilding = new FacultyBuilding(name, tourRoute.recommendArea());
                 tourRoute.addTourStop(facultyBuilding);
             }
-            displayMenu();
+            displayTourLength();
         } else {
-            System.out.println("That would exceed the maximum tour length");
+            System.out.println("Exceeded the maximum tour length");
         }
+        displayMenu();
+    }
 
+    public void displayTourLength() {
+        System.out.println("You have " + tourRoute.tourLength() + " stops to visit");
     }
 
 
