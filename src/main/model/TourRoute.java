@@ -1,19 +1,25 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import presistence.Writable;
+
 import java.util.HashMap;
 
-public class TourRoute {
+public class TourRoute implements Writable {
     // A list of tour stops
 
     protected HashMap<String, TourStop> toBeVisitedRoute;
     protected HashMap<String, TourStop> visitedRoute;
     public final int maxStopsCount = 4;
     protected String facultyOfInterest;
+    protected String name;
 
     //EFFECTS: make a list of the visited and to be visited tour stops
-    public TourRoute() {
+    public TourRoute(String name) {
         visitedRoute = new HashMap<>();
         toBeVisitedRoute = new HashMap<>();
+        this.name = name;
     }
 
     // will handle with an exception
@@ -102,4 +108,38 @@ public class TourRoute {
     public HashMap<String, TourStop> getVisitedRoute() {
         return visitedRoute;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Visited Tour Stops", visitedTourStopsToJson());
+        json.put("Unvisited Tour Stops", unvisitedTourStopsToJson());
+        json.put("name", name);
+        return json;
+    }
+
+    //EFFECTS: returns tour stops in visited tour route as a JSON array
+    private JSONArray visitedTourStopsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        visitedRoute.forEach((key, value)
+                -> jsonArray.put(value.toJson()));
+
+        return jsonArray;
+    }
+
+    //EFFECTS: returns tour stops in unvisited tour route as a JSON array
+    private JSONArray unvisitedTourStopsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        toBeVisitedRoute.forEach((key, value)
+                -> jsonArray.put(value.toJson()));
+
+        return jsonArray;
+    }
+
 }

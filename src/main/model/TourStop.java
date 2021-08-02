@@ -1,8 +1,11 @@
 package model;
 
+import org.json.JSONObject;
+import presistence.Writable;
+
 import java.util.Objects;
 
-public abstract class TourStop {
+public abstract class TourStop implements Writable {
     //Supertype extended by four types
     //Represents spots on campus worth checking out
 
@@ -69,6 +72,16 @@ public abstract class TourStop {
 
     //EFFECTS: returns the tour stop type
     public abstract String getTourStopType();
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("area", area);
+        json.put("visited?", isVisited);
+        json.put("should revisit?", shouldRevisit);
+        return json;
+    }
 
 }
 

@@ -1,18 +1,28 @@
 package ui;
 
 import model.*;
+import presistence.JsonReader;
+import presistence.JsonWriter;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class CampusTourConsole {
     // my UBC campus tour console application
 
+    private static final String JSON_STORE = "./data/tourRoute.json";
     private Scanner input;
-    private final TourRoute tourRoute = new TourRoute();
+    private TourRoute tourRoute;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     //EFFECTS: runs the campus tour application
     public CampusTourConsole() throws IOException {
+        input = new Scanner(System.in);
+        tourRoute = new TourRoute("My tour route");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runCampusTour();
     }
 
@@ -42,10 +52,12 @@ public class CampusTourConsole {
     private void displayMenu() {
         System.out.println("\nSelect from: ");
         System.out.println("\ta -> Add a tour stop");
-        System.out.println("\ts -> Start tour and visit stop");
+        System.out.println("\tt -> Start tour and visit stop");
         System.out.println("\tn -> view Next stops");
         System.out.println("\tv -> view Visited stops");
         System.out.println("\tc -> allow Customization according to faculty");
+        System.out.println("\ts -> save tour route to file");
+        System.out.println("\tl -> load tour route from file");
         System.out.println("\tq -> quit");
 
     }
@@ -57,7 +69,7 @@ public class CampusTourConsole {
             case "a":
                 addTourStop();
                 break;
-            case "s":
+            case "t":
                 visit();
                 break;
             case "n":
@@ -69,6 +81,10 @@ public class CampusTourConsole {
             case "c":
                 allowCustomization();
                 break;
+            case "s":
+                saveTourRoute();
+            case "l":
+                loadTourRoute();
             default:
                 System.out.println("Not a valid selection...");
                 break;
@@ -197,6 +213,28 @@ public class CampusTourConsole {
     //EFFECTS: displays the current tour length
     public void displayTourLength() {
         System.out.println("You have " + tourRoute.tourLength() + " stops to visit");
+    }
+
+    private void saveTourRoute() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(tourRoute);
+            jsonWriter.close();
+            System.out.println("Saved " + tourRoute.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadTourRoute() {
+        try {
+            tourRoute = jsonReader.read();
+            System.out.println("Loaded " + tourRoute.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }
 

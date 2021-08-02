@@ -1,0 +1,18 @@
+{
+    "Visited Tour Stops": [],
+    "name": "My tour route",
+    "Unvisited Tour Stops": [
+        {
+            "area": "North",
+            "visited?": false,
+            "name": "IKB",
+            "should revisit?": false
+        },
+        {
+            "area": "North",
+            "visited?": false,
+            "name": "Buchanan",
+            "should revisit?": false
+        }
+    ]
+}

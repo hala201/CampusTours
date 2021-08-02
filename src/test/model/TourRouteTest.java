@@ -10,7 +10,7 @@ public class TourRouteTest {
 
     @BeforeEach
     public void setup() {
-        tourRoute = new TourRoute();
+        tourRoute = new TourRoute("My tour route");
     }
 
     @Test
