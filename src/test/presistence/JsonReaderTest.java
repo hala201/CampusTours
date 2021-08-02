@@ -5,7 +5,9 @@ import model.TourStop;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -41,12 +43,11 @@ public class JsonReaderTest extends JsonTest{
         try {
             TourRoute tr = reader.read();
             assertEquals("My tour route", tr.getName());
-            HashMap<String, TourStop> visited = tr.getVisitedRoute();
-            HashMap<String,TourStop> unvisited = tr.getToBeVisitedRoute();
-            assertEquals(0, visited.size());
-            assertEquals(2, tr.tourLength());
-            checkTourStop("Buchanan", "North" , unvisited.get(0));
-            checkTourStop("IKB", "North", unvisited.get(1));
+            List<TourStop> visited = new ArrayList<TourStop>(tr.getVisitedRoute().values());
+            List<TourStop> unvisited = new ArrayList<TourStop>(tr.getToBeVisitedRoute().values());
+            assertEquals(2, unvisited.size());
+            checkTourStop("Buchanan", "North" , unvisited.get(1));
+            checkTourStop("IKB", "North", unvisited.get(0));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

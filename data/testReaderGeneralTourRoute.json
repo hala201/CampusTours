@@ -1,19 +1,12 @@
 {
-  "Visited Tour Stops": [],
-  "Unvisited Tour Stops": [
+  "UnvisitedRoute": [
     {
       "area": "North",
-      "visited?": false,
-      "food place": "ike",
-      "name": "IKB",
-      "should revisit?": false
+      "name": "IKB"
     },
     {
       "area": "North",
-      "visited?": false,
-      "food place": "stir",
       "name": "Buchanan",
-      "should revisit?": false
     }
   ],
   "name": "My tour route"

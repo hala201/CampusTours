@@ -4,7 +4,9 @@ import model.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -53,12 +55,10 @@ public class JsonWriterTest extends JsonTest {
             JsonReader reader = new JsonReader("./data/testWriterGeneralTourRoute.json");
             tr = reader.read();
             assertEquals("My tour route", tr.getName());
-            HashMap<String, TourStop> visited = tr.getVisitedRoute();
-            HashMap<String, TourStop> unvisited = tr.getToBeVisitedRoute();
-
-//            assertEquals(2, unvisited.size());
-//            checkTourStop("IKB", "North", unvisited.get(0));
-//            checkTourStop("Buchanan", "North", unvisited.get(1));
+            List<TourStop> unvisited = new ArrayList<TourStop>(tr.getToBeVisitedRoute().values());
+            assertEquals(2, unvisited.size());
+            checkTourStop("IKB", "North", unvisited.get(0));
+            checkTourStop("Buchanan", "North", unvisited.get(1));
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");

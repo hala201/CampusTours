@@ -1,5 +1,6 @@
 package presistence;
 
+import model.FacultyBuilding;
 import model.Library;
 import model.TourRoute;
 
@@ -54,7 +55,7 @@ public class JsonReader {
     //MODIFIES: this
     //EFFECTS: parses tour stops from JSON object and adds them to tour route
     private void addTourStops(TourRoute tr, JSONObject jsonObject) {
-        JSONArray jsonArray = jsonObject.getJSONArray("Unvisited Tour Stops");
+        JSONArray jsonArray = jsonObject.getJSONArray("UnvisitedRoute");
         for (Object json : jsonArray) {
             JSONObject nextTourStop = (JSONObject) json;
             addTourStop(tr, nextTourStop);
@@ -66,7 +67,7 @@ public class JsonReader {
     private void addTourStop(TourRoute tr, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         String location = String.valueOf(jsonObject.getString("area"));
-        TourStop tourStop = new Library(name, location);
+        TourStop tourStop = new FacultyBuilding(name, location);
         tr.addTourStop(tourStop);
     }
 }

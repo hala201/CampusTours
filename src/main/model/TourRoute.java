@@ -4,23 +4,23 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import presistence.Writable;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TourRoute implements Writable {
     // A list of tour stops
 
-    protected List<TourStop> toBeVisitedRoute;
-    protected List<TourStop> visitedRoute;
+    protected HashMap<String, TourStop> toBeVisitedRoute;
+    protected HashMap<String, TourStop> visitedRoute;
     public final int maxStopsCount = 4;
     protected String facultyOfInterest;
     protected String name;
 
     //EFFECTS: make a list of the visited and to be visited tour stops
     public TourRoute(String name) {
-        visitedRoute = new ArrayList<>();
-        toBeVisitedRoute = new ArrayList<>();
+        visitedRoute = new HashMap<>();
+        toBeVisitedRoute = new HashMap<>();
         this.name = name;
     }
 
@@ -33,9 +33,8 @@ public class TourRoute implements Writable {
     //        returns true if added successfully and false otherwise
     public boolean addTourStop(TourStop tourStop) {
         if (toBeVisitedRoute.size() < maxStopsCount) {
-            if (tourStop.getArea() == recommendArea()
-                    && !containsTourStop(tourStop)) {
-                toBeVisitedRoute.add(tourStop);
+            if (!containsTourStop(tourStop)) {
+                toBeVisitedRoute.put(tourStop.getName(), tourStop);
                 return true;
             }
         }
@@ -50,9 +49,9 @@ public class TourRoute implements Writable {
     //MODIFIES: this
     //EFFECTS: sets isVisited field in the TourStop class to true
     public boolean markAsVisited(TourStop tourStop) {
-        if (toBeVisitedRoute.contains(tourStop)) {
+        if (toBeVisitedRoute.containsValue(tourStop)) {
             tourStop.visit();
-            visitedRoute.add(tourStop);
+            visitedRoute.put(tourStop.name, tourStop);
             return true;
         }
         return false;
@@ -60,12 +59,12 @@ public class TourRoute implements Writable {
 
     //EFFECTS: return true if given tour stop is in toBeVisitedRoute and false otherwise
     public boolean containsTourStop(TourStop tourStop) {
-        return toBeVisitedRoute.contains(tourStop);
+        return toBeVisitedRoute.containsValue(tourStop);
     }
 
     //EFFECTS: return true if given tour stop is in unvisitedRoute and false otherwise
     public boolean containsVisitedTourStop(TourStop tourStop) {
-        return visitedRoute.contains(tourStop);
+        return visitedRoute.containsValue(tourStop);
     }
 
     //EFFECTS: return the number of stops in the tour route
@@ -118,28 +117,30 @@ public class TourRoute implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("Visited Tour Stops", visitedTourStopsToJson());
-        json.put("Unvisited Tour Stops", unvisitedTourStopsToJson());
+       // json.put("Visited Tour Stops", visitedTourStopsToJson());
+        json.put("UnvisitedRoute", unvisitedTourStopsToJson());
         json.put("name", name);
         return json;
     }
 
-    //EFFECTS: returns tour stops in visited tour route as a JSON array
-    private JSONArray visitedTourStopsToJson() {
-        JSONArray jsonArray = new JSONArray();
-
-        visitedRoute.forEach((key, value)
-                -> jsonArray.put(value.toJson()));
-
-        return jsonArray;
-    }
+//    //EFFECTS: returns tour stops in visited tour route as a JSON array
+//    private JSONArray visitedTourStopsToJson() {
+//        JSONArray jsonArray = new JSONArray();
+//        List<TourStop> visitedArray = new ArrayList<TourStop>(visitedRoute.values());
+//        for (TourStop ts : visitedArray) {
+//            jsonArray.put(ts.toJson());
+//        }
+//        return jsonArray;
+//    }
 
     //EFFECTS: returns tour stops in unvisited tour route as a JSON array
     private JSONArray unvisitedTourStopsToJson() {
         JSONArray jsonArray = new JSONArray();
+        List<TourStop> unvisitedArray = new ArrayList<TourStop>(toBeVisitedRoute.values());
 
-        toBeVisitedRoute.forEach((key, value)
-                -> jsonArray.put(value.toJson()));
+        for (TourStop ts : unvisitedArray) {
+            jsonArray.put(ts.toJson());
+        }
 
         return jsonArray;
     }

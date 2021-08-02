@@ -21,8 +21,6 @@ public abstract class TourStop implements Writable {
     public TourStop(String name, String area) {
         this.name = name;
         this.area = area;
-        isVisited = false;
-        shouldRevisit = false;
     }
 
     // getter
@@ -78,8 +76,6 @@ public abstract class TourStop implements Writable {
         JSONObject json = new JSONObject();
         json.put("name", name);
         json.put("area", area);
-        json.put("visited?", isVisited);
-        json.put("should revisit?", shouldRevisit);
         return json;
     }
 

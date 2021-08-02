@@ -96,23 +96,23 @@ public class TourRouteTest {
         assertFalse(tourRoute.addTourStop(musicBuilding));
     }
 
-    @Test
-    public void testAddUnrecommendedStops() {
-        TourStop buchanan = new FacultyBuilding("Buchanan Building", "North");
-        TourStop roseGarden = new Garden("Rose Garden", "North");
-        TourStop museumOfAnthropology = new Museum("Museum of Anthropology", "North");
-        TourStop ed = new Library("UBC Education Library", "Center");
-
-        assertEquals(tourRoute.tourLength(), 0);
-
-        tourRoute.addTourStop(buchanan);
-        tourRoute.addTourStop(roseGarden);
-        tourRoute.addTourStop(museumOfAnthropology);
-
-        assertEquals(tourRoute.tourLength(), 3);
-
-        assertFalse(tourRoute.addTourStop(ed));
-    }
+//    @Test
+//    public void testAddUnrecommendedStops() {
+//        TourStop buchanan = new FacultyBuilding("Buchanan Building", "North");
+//        TourStop roseGarden = new Garden("Rose Garden", "North");
+//        TourStop museumOfAnthropology = new Museum("Museum of Anthropology", "North");
+//        TourStop ed = new Library("UBC Education Library", "Center");
+//
+//        assertEquals(tourRoute.tourLength(), 0);
+//
+//        tourRoute.addTourStop(buchanan);
+//        tourRoute.addTourStop(roseGarden);
+//        tourRoute.addTourStop(museumOfAnthropology);
+//
+//        assertEquals(tourRoute.tourLength(), 3);
+//
+//        assertFalse(tourRoute.addTourStop(ed));
+//    }
 
     @Test
     public void testExceedLimit() {
@@ -183,4 +183,6 @@ public class TourRouteTest {
         assertEquals(tourRoute.getToBeVisitedRoute(),
                 tourRoute.getToBeVisitedRoute());
     }
+
+
 }
