@@ -78,9 +78,9 @@ public class CampusTourConsole {
             case "v":
                 viewVisitedStops();
                 break;
-            case "c":
-                allowCustomization();
-                break;
+//            case "c":
+//                allowCustomization();
+//                break;
             case "s":
                 saveTourRoute();
             case "l":
