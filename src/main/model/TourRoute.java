@@ -123,15 +123,6 @@ public class TourRoute implements Writable {
         return json;
     }
 
-//    //EFFECTS: returns tour stops in visited tour route as a JSON array
-//    private JSONArray visitedTourStopsToJson() {
-//        JSONArray jsonArray = new JSONArray();
-//        List<TourStop> visitedArray = new ArrayList<TourStop>(visitedRoute.values());
-//        for (TourStop ts : visitedArray) {
-//            jsonArray.put(ts.toJson());
-//        }
-//        return jsonArray;
-//    }
 
     //EFFECTS: returns tour stops in unvisited tour route as a JSON array
     private JSONArray unvisitedTourStopsToJson() {

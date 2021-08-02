@@ -26,8 +26,8 @@ As a current *Student Ambassador*, I had given over 200 tours around the UBC cam
 -   As a user, I want to be able to mark stops I want to revisit
 -   As a user, I want to be able to get my tour stops customized according my faculty
 -   As a user, I want to be able to get recommended food places with each stop (will be implemented in next phase)
--   As a user, I want to be able to save my to-do list to file 
--   As a user, I want to be able to be able to load my to-do list from file 
+-   As a user, I want to be able to save my upcoming tour route to file 
+-   As a user, I want to be able to be able to load my upcoming tour route from file 
 
 
 
