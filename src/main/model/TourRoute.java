@@ -4,21 +4,23 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import presistence.Writable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 
 public class TourRoute implements Writable {
     // A list of tour stops
 
-    protected HashMap<String, TourStop> toBeVisitedRoute;
-    protected HashMap<String, TourStop> visitedRoute;
+    protected List<TourStop> toBeVisitedRoute;
+    protected List<TourStop> visitedRoute;
     public final int maxStopsCount = 4;
     protected String facultyOfInterest;
     protected String name;
 
     //EFFECTS: make a list of the visited and to be visited tour stops
     public TourRoute(String name) {
-        visitedRoute = new HashMap<>();
-        toBeVisitedRoute = new HashMap<>();
+        visitedRoute = new ArrayList<>();
+        toBeVisitedRoute = new ArrayList<>();
         this.name = name;
     }
 
@@ -33,7 +35,7 @@ public class TourRoute implements Writable {
         if (toBeVisitedRoute.size() < maxStopsCount) {
             if (tourStop.getArea() == recommendArea()
                     && !containsTourStop(tourStop)) {
-                toBeVisitedRoute.put(tourStop.getName(), tourStop);
+                toBeVisitedRoute.add(tourStop);
                 return true;
             }
         }
@@ -48,9 +50,9 @@ public class TourRoute implements Writable {
     //MODIFIES: this
     //EFFECTS: sets isVisited field in the TourStop class to true
     public boolean markAsVisited(TourStop tourStop) {
-        if (toBeVisitedRoute.containsValue(tourStop)) {
+        if (toBeVisitedRoute.contains(tourStop)) {
             tourStop.visit();
-            visitedRoute.put(tourStop.name, tourStop);
+            visitedRoute.add(tourStop);
             return true;
         }
         return false;
@@ -58,12 +60,12 @@ public class TourRoute implements Writable {
 
     //EFFECTS: return true if given tour stop is in toBeVisitedRoute and false otherwise
     public boolean containsTourStop(TourStop tourStop) {
-        return toBeVisitedRoute.containsValue(tourStop);
+        return toBeVisitedRoute.contains(tourStop);
     }
 
     //EFFECTS: return true if given tour stop is in unvisitedRoute and false otherwise
     public boolean containsVisitedTourStop(TourStop tourStop) {
-        return visitedRoute.containsValue(tourStop);
+        return visitedRoute.contains(tourStop);
     }
 
     //EFFECTS: return the number of stops in the tour route

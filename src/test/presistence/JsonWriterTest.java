@@ -57,9 +57,6 @@ public class JsonWriterTest extends JsonTest {
             HashMap<String, TourStop> unvisited = tr.getToBeVisitedRoute();
 
 //            assertEquals(2, unvisited.size());
-//            assertEquals(2, tr.tourLength());
-//            assertEquals(0, visited.size());
-
 //            checkTourStop("IKB", "North", unvisited.get(0));
 //            checkTourStop("Buchanan", "North", unvisited.get(1));
 

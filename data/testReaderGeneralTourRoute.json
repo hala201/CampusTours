@@ -4,12 +4,14 @@
     {
       "area": "North",
       "visited?": false,
+      "food place": "ike",
       "name": "IKB",
       "should revisit?": false
     },
     {
       "area": "North",
       "visited?": false,
+      "food place": "stir",
       "name": "Buchanan",
       "should revisit?": false
     }

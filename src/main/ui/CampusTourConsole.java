@@ -65,29 +65,22 @@ public class CampusTourConsole {
     //MODIFIES: this
     //EFFECTS: processes user commands
     private void processCommand(String command) {
-        switch (command) {
-            case "a":
-                addTourStop();
-                break;
-            case "t":
-                visit();
-                break;
-            case "n":
-                viewNextStops();
-                break;
-            case "v":
-                viewVisitedStops();
-                break;
-//            case "c":
-//                allowCustomization();
-//                break;
-            case "s":
-                saveTourRoute();
-            case "l":
-                loadTourRoute();
-            default:
-                System.out.println("Not a valid selection...");
-                break;
+        if ("a".equals(command)) {
+            addTourStop();
+        } else if ("t".equals(command)) {
+            visit();
+        } else if ("n".equals(command)) {
+            viewNextStops();
+        } else if ("v".equals(command)) {
+            viewVisitedStops();
+        } else if ("s".equals(command)) {
+            saveTourRoute();
+        } else if ("l".equals(command)) {
+            loadTourRoute();
+        } else if ("c".equals(command)) {
+            allowCustomization();
+        } else {
+            System.out.println("Not a valid selection... refer to menu above and select again");
         }
 
     }

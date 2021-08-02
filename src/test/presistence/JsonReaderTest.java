@@ -44,9 +44,9 @@ public class JsonReaderTest extends JsonTest{
             HashMap<String, TourStop> visited = tr.getVisitedRoute();
             HashMap<String,TourStop> unvisited = tr.getToBeVisitedRoute();
             assertEquals(0, visited.size());
-//            assertEquals(2, unvisited.size());
-//            checkTourStop("Buchanan", "North" , unvisited.get(0));
-//            checkTourStop("IKB", "North", unvisited.get(1));
+            assertEquals(2, tr.tourLength());
+            checkTourStop("Buchanan", "North" , unvisited.get(0));
+            checkTourStop("IKB", "North", unvisited.get(1));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
