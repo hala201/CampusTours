@@ -29,5 +29,7 @@ As a current *Student Ambassador*, I had given over 200 tours around the UBC cam
 -   As a user, I want to be able to save my upcoming tour route to file 
 -   As a user, I want to be able to be able to load my upcoming tour route from file 
 
+### Sources:
+CPSC210 Instructors (2021) JsonSerializationDemo Source Code (Version 1.0) [Source Code] : https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
 

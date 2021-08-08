@@ -208,7 +208,8 @@ public class CampusTourConsole {
         System.out.println("You have " + tourRoute.tourLength() + " stops to visit");
     }
 
-    private void saveTourRoute() {
+    // EFFECTS: saves tour route to file
+    public void saveTourRoute() {
         try {
             jsonWriter.open();
             jsonWriter.write(tourRoute);
@@ -217,11 +218,12 @@ public class CampusTourConsole {
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
+
     }
 
     // MODIFIES: this
-    // EFFECTS: loads workroom from file
-    private void loadTourRoute() {
+    // EFFECTS: loads tour route from file
+    public void loadTourRoute() {
         try {
             tourRoute = jsonReader.read();
             System.out.println("Loaded " + tourRoute.getName() + " from " + JSON_STORE);
@@ -229,5 +231,9 @@ public class CampusTourConsole {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
+
+//    public void setTourRoute(TourRoute tourRoute) {
+//        this.tourRoute = tourRoute;
+//    }
 }
 
