@@ -122,8 +122,8 @@ public class TourRouteGui extends JPanel {
     private void buildTourRouteViewer() {
         this.tourRouteViewer = new JPanel();
         tourRouteViewer.setBackground(textPanelColor);
-        Font font = new Font("Century Schoolbook", Font.BOLD, 15);
-        Font font2 = new Font("Times New Roman", Font.BOLD, 15);
+        Font font = new Font("Helvetica", Font.BOLD, 14);
+        Font font2 = new Font("Helvetica", Font.BOLD, 15);
         tourRouteViewer.setLayout(new GridLayout(2, 1, 0, 10));
         this.tourStopTitle = new JLabel("My Upcoming Tour Route:");
         textArea = new JTextArea();
@@ -232,7 +232,7 @@ public class TourRouteGui extends JPanel {
 
     // EFFECTS: draw image on the tour route TODO
     private void drawIcon() throws IOException {
-        BufferedImage myPicture = ImageIO.read(new File(" "));
+        BufferedImage myPicture = ImageIO.read(new File("./data/tobs.jpg"));
         Image newImage = myPicture.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
         this.imageLabel = new JLabel(new ImageIcon(newImage));
     }
