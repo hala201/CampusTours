@@ -1,8 +1,11 @@
-package model;
+package ui;
+
+import model.TourStop;
 
 import java.util.HashMap;
 import java.util.Map;
 
+//Class to print out the list of stops using string buffer
 public class TourStopPrinter {
     //This class implementation was done by the help of StackOverflow
     //EFFECTS: print out the list

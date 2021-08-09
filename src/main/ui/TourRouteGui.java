@@ -82,7 +82,7 @@ public class TourRouteGui extends JPanel {
         this.title.setBackground(background1);
         this.title.setLayout(new GridBagLayout());
         this.topTitle = new JLabel("UBC Campus Tour!");
-        this.topTitle.setForeground(new Color(236, 224, 155));
+        this.topTitle.setForeground(ubcGold);
         Font font = new Font("arial", Font.BOLD, 60);
         this.topTitle.setFont(font);
         placeTitleElements();
@@ -151,7 +151,7 @@ public class TourRouteGui extends JPanel {
         textArea = new JTextArea();
         this.tourRouteTitle.setFont(font);
         textArea.setFont(font);
-        textArea.append(tourRoute.printNextStops());
+        textArea.append(printNextStops());
 
         JScrollPane scroll = new JScrollPane(textArea);
         textArea.setBackground(Color.WHITE);
@@ -238,6 +238,11 @@ public class TourRouteGui extends JPanel {
         this.tourStopLocationTitle.setFont(font);
 
         this.addTourStopButton.setFont(font);
+    }
+
+    //EFFECTS: prints the upcoming tour stops
+    public String printNextStops() {
+        return TourStopPrinter.printList(tourRoute.getToBeVisitedRoute());
     }
 
 
@@ -334,7 +339,7 @@ public class TourRouteGui extends JPanel {
             } catch (IOException i) {
                 textArea.append("Can't find file!");
             }
-            textArea.append(tourRoute.printNextStops());
+            textArea.append(printNextStops());
         }
     }
 
@@ -344,7 +349,7 @@ public class TourRouteGui extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             textArea.append("\n   Next Stops:   \n"
-                    + tourRoute.printNextStops());
+                    + printNextStops());
             updateUI();
         }
     }
@@ -373,7 +378,7 @@ public class TourRouteGui extends JPanel {
                 makeSpecificTourStopType(name, choice, location);
                 textArea.append("\n"
                         +
-                        tourRoute.printNextStops() + "\n");
+                        printNextStops() + "\n");
                 updateUI();
             } else {
                 textArea.append("   Maximum Tour Route Length Exceeded   ");

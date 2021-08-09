@@ -232,8 +232,5 @@ public class CampusTourConsole {
         }
     }
 
-//    public void setTourRoute(TourRoute tourRoute) {
-//        this.tourRoute = tourRoute;
-//    }
 }
 

@@ -9,6 +9,16 @@
       "area": "North",
       "name": "Buchanan",
       "type": "Faculty Building"
+    },
+    {
+      "area": "North",
+      "name": "Rose",
+      "type": "Garden"
+    },
+    {
+      "area": "North",
+      "name": "MOA",
+      "type": "Museum"
     }
   ],
   "name": "My tour route"

@@ -45,9 +45,11 @@ public class JsonReaderTest extends JsonTest{
             assertEquals("My tour route", tr.getName());
             List<TourStop> visited = new ArrayList<TourStop>(tr.getVisitedRoute().values());
             List<TourStop> unvisited = new ArrayList<TourStop>(tr.getToBeVisitedRoute().values());
-            assertEquals(2, unvisited.size());
-            checkTourStop("Buchanan", "North" , unvisited.get(1));
+            assertEquals(4, unvisited.size());
             checkTourStop("IKB", "North", unvisited.get(0));
+            checkTourStop("Buchanan", "North" , unvisited.get(3));
+            checkTourStop("Rose","North", unvisited.get(1));
+            checkTourStop("MOA", "North", unvisited.get(2));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

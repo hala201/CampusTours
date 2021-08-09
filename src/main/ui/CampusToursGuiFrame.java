@@ -3,6 +3,7 @@ package ui;
 import javax.swing.*;
 import java.awt.*;
 
+//Class for the GUI frame of the program
 public class CampusToursGuiFrame extends JFrame {
     TourRouteGui tourRouteGui;
     PlayAudio audio = new PlayAudio();

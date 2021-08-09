@@ -4,6 +4,7 @@ import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
+//Class to play audio at the start of the program and during the tour
 public class PlayAudio {
     //REFERENCE: How to Play Sounds tutorial
     //EFFECTS: plays the starting sound of the application

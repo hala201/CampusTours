@@ -4,15 +4,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import presistence.Writable;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import presistence.JsonReader;
-import presistence.JsonWriter;
-import ui.CampusTourConsole;
+import ui.TourStopPrinter;
 
 public class TourRoute implements Writable {
     // A list of tour stops
@@ -120,13 +116,6 @@ public class TourRoute implements Writable {
         return name;
     }
 
-    public String printNextStops() {
-        return TourStopPrinter.printList(toBeVisitedRoute);
-    }
-
-    public String printVisitedStops() {
-        return TourStopPrinter.printList(visitedRoute);
-    }
 
     @Override
     public JSONObject toJson() {
