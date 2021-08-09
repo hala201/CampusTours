@@ -76,6 +76,7 @@ public abstract class TourStop implements Writable {
         JSONObject json = new JSONObject();
         json.put("name", name);
         json.put("area", area);
+        json.put("type", getTourStopType());
         return json;
     }
 

@@ -1,7 +1,8 @@
 {
     "UnvisitedRoute": [{
-        "area": "North",
-        "name": "mi"
+        "area": "1",
+        "name": "1",
+        "type": "Library"
     }],
-    "name": "My tour route"
+    "name": "My tour Route"
 }

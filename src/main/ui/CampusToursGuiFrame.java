@@ -12,11 +12,14 @@ public class CampusToursGuiFrame extends JFrame {
     public CampusToursGuiFrame() {
         super("UBC Campus Tour!");
         this.tourRouteGui = new TourRouteGui();
+        ImageIcon image = new ImageIcon("./data/logo.jpg");
+        this.setIconImage(image.getImage());
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(tourRouteGui);
-        audio.play("./data/welcome.wav"); //TODO
-        setPreferredSize(new Dimension(600, 600));
+        audio.play("./data/welcome.wav");
+
+        setPreferredSize(new Dimension(900, 700));
         pack();
         setLocationRelativeTo(null);
         setVisible(true);

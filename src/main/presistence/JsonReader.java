@@ -1,7 +1,6 @@
 package presistence;
 
-import model.FacultyBuilding;
-import model.TourRoute;
+import model.*;
 
 
 import java.io.IOException;
@@ -10,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-import model.TourStop;
 import org.json.*;
 
 
@@ -66,7 +64,17 @@ public class JsonReader {
     private void addTourStop(TourRoute tr, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         String location = String.valueOf(jsonObject.getString("area"));
-        TourStop tourStop = new FacultyBuilding(name, location);
+        String type = String.valueOf(jsonObject.getString("type"));
+        TourStop tourStop;
+        if (type.equals("Faculty Building")) {
+            tourStop = new FacultyBuilding(name, location);
+        } else if (type.equals("Library")) {
+            tourStop = new Library(name, location);
+        } else if (type.equals("Museum")) {
+            tourStop = new Museum(name, location);
+        } else {
+            tourStop = new Garden(name, location);
+        }
         tr.addTourStop(tourStop);
     }
 }

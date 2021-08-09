@@ -7,7 +7,7 @@ public class Main {
       //  CampusTourConsole campusTourConsole = new CampusTourConsole();
 
         CreateSplashScreen splashScreen = new CreateSplashScreen();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         splashScreen.dispose();
         new CampusToursGuiFrame();
 

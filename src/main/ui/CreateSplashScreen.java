@@ -9,18 +9,17 @@ public class CreateSplashScreen extends JWindow {
     Image splashScreen;
     ImageIcon imageIcon;
 
-    // TODO
-    //EFFECTS: create a splash screen
+    //EFFECTS: create a splash screen at the starting of the program
     public CreateSplashScreen() {
-        splashScreen = Toolkit.getDefaultToolkit().getImage("./data/tobs.jpg");
+        splashScreen = Toolkit.getDefaultToolkit().getImage("./data/splash.jpg");
         imageIcon = new ImageIcon(splashScreen);
-        setSize(imageIcon.getIconWidth(), imageIcon.getIconHeight());
+        setSize(imageIcon.getIconWidth(), imageIcon.getIconHeight()); //TODO
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (screenSize.width - getSize().width);
-        int y = (screenSize.height - getSize().height);
+        int x = (screenSize.width - getSize().width) / 2;
+        int y = (screenSize.height - getSize().height) / 2;
 
-        setLocation(x,y);
+        setLocation(x, y);
         setVisible(true);
     }
 

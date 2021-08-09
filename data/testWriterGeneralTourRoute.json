@@ -2,11 +2,13 @@
     "UnvisitedRoute": [
         {
             "area": "North",
-            "name": "IKB"
+            "name": "IKB",
+            "type": "Library"
         },
         {
             "area": "North",
-            "name": "Buchanan"
+            "name": "Buchanan",
+            "type": "Faculty Building"
         }
     ],
     "name": "My tour route"

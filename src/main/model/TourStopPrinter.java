@@ -9,8 +9,9 @@ public class TourStopPrinter {
     public static String printList(HashMap<String, TourStop> tourStops) {
         StringBuffer sbf = new StringBuffer();
         for (Map.Entry<String, TourStop> entry : tourStops.entrySet()) {
-            sbf.append("Name: ").append(entry.getKey())
-                    .append("   Type: ").append(entry.getValue().getTourStopType());
+            sbf.append(entry.getKey())
+                    .append(" ").append(entry.getValue().getTourStopType())
+                    .append("\n");
         }
         return sbf.toString();
     }
