@@ -1,8 +1,20 @@
 {
-    "UnvisitedRoute": [{
-        "area": "1",
-        "name": "1",
-        "type": "Library"
-    }],
+    "UnvisitedRoute": [
+        {
+            "area": "North",
+            "name": "Rose",
+            "type": "Garden"
+        },
+        {
+            "area": "North",
+            "name": "MOA",
+            "type": "Museum"
+        },
+        {
+            "area": "North",
+            "name": "Moa",
+            "type": "Museum"
+        }
+    ],
     "name": "My tour Route"
 }
