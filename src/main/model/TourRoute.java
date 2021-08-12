@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import ui.TourStopPrinter;
 
 public class TourRoute implements Writable {
     // A list of tour stops
@@ -112,22 +111,22 @@ public class TourRoute implements Writable {
         return visitedRoute;
     }
 
+    //getter
     public String getName() {
         return name;
     }
 
-
+    //EFFECTS: return tour stops in unvisited tour route as a JSON array
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        // json.put("Visited Tour Stops", visitedTourStopsToJson());
         json.put("UnvisitedRoute", unvisitedTourStopsToJson());
         json.put("name", name);
         return json;
     }
 
 
-    //EFFECTS: returns tour stops in unvisited tour route as a JSON array
+    //EFFECTS: helper to turn tour stops in unvisited tour route as a JSON array
     private JSONArray unvisitedTourStopsToJson() {
         JSONArray jsonArray = new JSONArray();
         List<TourStop> unvisitedArray = new ArrayList<TourStop>(toBeVisitedRoute.values());
@@ -135,7 +134,6 @@ public class TourRoute implements Writable {
         for (TourStop ts : unvisitedArray) {
             jsonArray.put(ts.toJson());
         }
-
         return jsonArray;
     }
 

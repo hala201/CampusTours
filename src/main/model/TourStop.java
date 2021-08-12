@@ -3,7 +3,6 @@ package model;
 import org.json.JSONObject;
 import presistence.Writable;
 
-import java.util.Objects;
 
 public abstract class TourStop implements Writable {
     //Supertype extended by four types

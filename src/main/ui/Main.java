@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
-      //  CampusTourConsole campusTourConsole = new CampusTourConsole();
+      // CampusTourConsole campusTourConsole = new CampusTourConsole();
 
         CreateSplashScreen splashScreen = new CreateSplashScreen();
         Thread.sleep(2000);

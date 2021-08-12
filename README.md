@@ -32,4 +32,39 @@ As a current *Student Ambassador*, I had given over 200 tours around the UBC cam
 ### Sources:
 CPSC210 Instructors (2021) JsonSerializationDemo Source Code (Version 1.0) [Source Code] : https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
+### Phase 4 Task 2:
+I have chosen to implement a Map interface in the TourRoute class where the TourRoute consists of two HashMaps of String keys and TourStop values.
+
+### Phase 4 Task 3:
+If I had more time to work on the project, I would:
+
+- **Reduce code clones** in TourStop instantiation according to user's input. 
+  In the existing program, instantiation using one of TourStop subclasses (one of Library, Museum, FacultyBuilding, Garden) depended on the user's preference which caused code clones in CampusToursConsole and TourRouteGui. This can
+  be simply resolved by pulling the repeated piece of code into a method in TourRoute and call that from CampusToursConsole.
+  Another way is to rethink the relationship
+  between TourStop and the four subclasses.
+  It might be best to use an enumeration in the context of the existing program where
+  there is not so much difference between the functionality of each tour stop type. However, I kept it as such to leave
+  room for additional features that are unique to each tour stop type.
+  
+  
+- **Reduce code clones** between CampusToursConsole and TourRouteGui by pulling code clones of `saveTourRoute()` and `SaveStopListener` class as well as
+   `loadTourRoute()` and `LoadStopListener` class into methods.
+  
+  
+- **Increase cohesion and improve Single Responsibility principle**
+    in the TourRouteGui. This class had many responsibilities such as building the buttons, placing the buttons,
+    building the title, placing the title elements. This was evident through the existing code clusters in the class.
+    This can be resolved by extracting those clusters into separate classes.
+  
+
+- **Reduce semantic coupling** between CampusToursConsole and TourRoute
+specifically when implementing the `recommendArea()` in `TourRoute` class
+  and `allowCustomization()` in `CampusToursConsole` class. It is unlikely that I would need
+  to change the area and faculty relationship since my implementation took inspiration from
+  the urban plan of UBC which is unlikely to change. However, the default area I have is
+  "North", and I might want to change that in the future. In that case, it would be best to extract the faculty-area customization code into a separate method
+  to keep a single point of control.
+  
+
 
