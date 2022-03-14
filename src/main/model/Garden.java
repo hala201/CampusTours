@@ -1,7 +1,7 @@
 package model;
 
 public class Garden extends TourStop {
-    //subclass of TourStop of type Garden
+    //subclass of TourStop of type Garden.
 
 
     public Garden(String name, String location) {
